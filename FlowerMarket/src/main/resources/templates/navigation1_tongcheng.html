@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>同城好物</title>
+    <link rel="stylesheet" href="../static/css/navigation.css">
+</head>
+<body>
+<div id='main1' class='main1'>
+        <div id="group0" class="group0">  <!--菜单栏-->
+               <img id='flower' class='flower' src='../static/img/Mask_group.png'/>
+            <!-- 左上角头像和用户名 -->
+            <div class="profile-section">
+                <a href="/login2"><img id="profile_picture" class="profile_picture"
+                                       th:src="${userpicture != null ? userpicture :'/static/img/Avatar.png'}" alt="Profile Picture"></a>                <div class="username" th:text="${username}">用户名</div>
+            </div>
+
+                <!-- 右上角图标 -->
+                <div class="icons">
+                   <a href="/main"><img id='refresh' class='refresh' src='../static/img/Refresh.png'/></a>
+                   <a href="/shopcart"><img id='shopee' class='shopee' src='../static/img/Shopee.png'/></a>
+                   <a href="/settings"><img id='services' class='services' src='../static/img/Services.png'/></a>
+                </div>
+                
+                <form>
+                    <input type="text" ><button type="submit">搜索</button>
+                </form>
+                <div id='group1' class='group1'><!--导航栏-->
+                    
+                    <ul class="ul1">
+                    <li ><a href="/main">首页</a></li>
+                    <li style=" background-color: #F6BE8C;"><a href="/tongcheng">同城好物</a></li>
+                    <li><a href="/miaosha">特惠秒杀</a></li>
+                    <li><a href="/help">帮助|反馈</a></li>
+                    </ul>
+                </div>
+        </div>
+   
+    <div class="main2">
+     <div id='group2' class='group2'><!--侧边栏-->
+        <div id='classify' class='classify'>
+         <label >分类</label>
+           <ul>
+               <li><a id='classify1' class='classify0' href="/classify1"> 迎宾花卉</a></li>
+               <li><a id='classify2' class='classify0'>景观植物</a></li>
+               <li><a id='classify3' class='classify0'>客厅装饰植物</a></li>
+               <li><a id='classify4' class='classify0'>花种</a></li>
+               <li><a id='classify5' class='classify0'> 画眉</a></li>
+               <li><a id='classify6' class='classify0'>鸟类用品</a></li>
+               <li><a id='classify7' class='classify0'> 园艺工具</a></li>
+           
+           </ul>
+        </div>
+     </div>
+     <!--主内容区-->
+     <div  id='group3' class='group3' >
+         <div id='group3_1' class='group3_0' th:each="commodity : ${commodities}" >
+             <div id='group3_1w' class='group3_1' >
+                 <img th:src="${commodity.comPicture != null ? commodity.comPicture :
+                                 'https://img1.baidu.com/it/u=3148947595,1853549332&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=664'}">
+             </div>
+             <div class="text-container">
+                 <a th:href="@{/product/{comId}(comId=${commodity.comId})}"
+                    th:text="${commodity.comName}">商品名称</a>
+                 <label th:text="'￥' + ${#numbers.formatDecimal(commodity.comPrice, 1, 2)}">价格</label>
+             </div>
+         </div>
+        <div id='group3_2' class='group3_0'>
+            <div id='group3_2w' class='group3_1'></div>
+        </div>
+        <div id='group3_3' class='group3_0'>
+            <div id='group3_3w' class='group3_1'></div>
+        </div>
+        <div id='group3_4' class='group3_0'>
+            <div id='group3_4w' class='group3_1'></div>
+        </div>
+        <div id='group3_5' class='group3_0'>
+            <div id='group3_5w' class='group3_1'></div>
+        </div>
+        <div id='group3_6' class='group3_0'>
+            <div id='group3_6w' class='group3_1'></div>
+        </div>
+        <div id='group3_7' class='group3_0'>
+            <div id='group3_7w' class='group3_1'></div>
+        </div>
+        <div id='group3_8' class='group3_0'>
+            <div id='group3_8w' class='group3_1'></div>
+        </div>
+        <div id='group3_9' class='group3_0'>
+            <div id='group3_9w' class='group3_1'></div>
+        </div>
+     </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+      <p>&copy; 花鸟购物网站. 保留所有权利.</p>
+      <div class="footer-links">
+        <a href="#">关于我们</a>
+        <a href="#">帮助中心</a>
+        <a href="#">隐私政策</a>
+        <a href="#">联系我们</a>
+      </div>
+    </div>
+ </footer>  
+        
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品详情页</title>
+  <link rel="stylesheet" href="../static/css/product.css">
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../static/js/product.js"></script>
+
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <h1>购物网站</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/main">首页</a></li>
+          <li><a href="/cart">购物车</a></li>
+          <li><a href="/help">帮助中心</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="product-container">
+      <div class="product-image">
+        <div class="main-image">
+          <img id="main-product-image" th:src="${commodity.comPicture}" alt="商品主图">
+        </div>
+        <div class="thumbnail-images">
+          <img class="thumbnail" src="https://img1.baidu.com/it/u=3148947595,1853549332&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=664" alt="缩略图1" onclick="changeImage(this.src)">
+          <img class="thumbnail" src="https://img2.baidu.com/it/u=3148947595,1853549332&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=664" alt="缩略图2" onclick="changeImage(this.src)">
+          <img class="thumbnail" src="https://img3.baidu.com/it/u=3148947595,1853549332&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=664" alt="缩略图3" onclick="changeImage(this.src)">
+        </div>
+      </div>
+
+      <div class="product-info">
+        <h2 class="product-title" th:text="${commodity.comName}">菊花花束</h2>
+        <p class="product-price" th:text="'¥' + ${commodity.comPrice}">¥35.00</p>
+        <input type="hidden" id="comId" th:value="${commodity.comId}"/>
+        <div class="product-description">
+          <p>这是一束精美的<span th:text="${commodity.comName}">菊花花束</span>，适合各种场合使用。花束包含多朵新鲜的花朵，搭配精美的包装，是送礼的绝佳选择。</p>
+        </div>
+        <div class="product-quantity">
+          <label for="quantity">数量：</label>
+          <input type="number" id="quantity" value="1" min="1" max="99">
+        </div>
+        <div class="product-actions">
+          <button id="addToCart" class="btn">加入购物车</button>
+          <button id="buyNow" class="btn primary">立即购买</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <h3>商品详情</h3>
+      <div class="details-content">
+        <p>商品名称：<span th:text="${commodity.comName}">菊花花束</span></p>
+        <p>商品编号：<span th:text="${commodity.comId}">11</span></p>
+        <p>产地：云南</p>
+        <p>包装：精美礼盒包装</p>
+        <p>保质期：7天</p>
+      </div>
+    </div>
+
+    <div class="related-products">
+      <h3>相关商品</h3>
+      <div class="related-products-container">
+        <div class="related-product">
+          <img src="https://img1.baidu.com/it/u=3148947595,1853549332&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=664" alt="相关商品1">
+          <h4>玫瑰花束</h4>
+          <p class="price">¥45.00</p>
+        </div>
+        <div class="related-product">
+          <img src="https://img2.baidu.com/it/u=3148947595,1853549332&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=664" alt="相关商品2">
+          <h4>郁金香花束</h4>
+          <p class="price">¥50.00</p>
+        </div>
+        <div class="related-product">
+          <img src="https://img3.baidu.com/it/u=3148947595,1853549332&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=664" alt="相关商品3">
+          <h4>向日葵花束</h4>
+          <p class="price">¥40.00</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 花鸟购物网站. 保留所有权利.</p>
+      <div class="footer-links">
+        <a href="#">关于我们</a>
+        <a href="#">帮助中心</a>
+        <a href="#">隐私政策</a>
+        <a href="#">联系我们</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../static/js/product.js"></script>
+</body>
+</html>

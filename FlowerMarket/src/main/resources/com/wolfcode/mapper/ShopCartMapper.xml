@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfcode.mapper.ShopCartMapper">
+
+    <!-- 定义购物车与商品关联的结果映射 -->
+    <resultMap id="shopCartMap" type="com.wolfcode.domain.ShopCart">
+        <!-- 购物车基础字段 -->
+        <id property="shopcartId" column="shopcart_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="comId" column="com_id"/>
+        <result property="quantity" column="quantity"/>
+        <result property="checked" column="is_checked"/>
+
+        <!-- 关联商品信息 -->
+        <association property="commodity" javaType="com.wolfcode.domain.Commodity">
+            <id property="comId" column="comId"/>
+            <result property="comName" column="comName"/>
+            <result property="comPrice" column="comPrice"/>
+            <result property="comPicture" column="comPicture"/>
+        </association>
+    </resultMap>
+
+    <!-- 添加购物车项 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="shopcartId">
+        /* 插入新购物车记录 */
+        INSERT INTO shopcart (
+            user_id,
+            com_id,
+            quantity,
+            is_checked
+        ) VALUES (
+                     #{userId},
+                     #{comId},
+                     #{quantity},
+                     #{checked}
+                 )
+    </insert>
+
+    <!-- 查询用户购物车 -->
+    <select id="selectByUserId" resultMap="shopCartMap">
+        /* 获取当前用户的完整购物车数据 */
+        SELECT
+            sc.shopcart_id,
+            sc.user_id,
+            sc.com_id,
+            sc.quantity,
+            sc.is_checked,
+            c.comName,
+            c.comPrice,
+            c.comPicture
+        FROM shopcart sc
+                 LEFT JOIN commodity c ON sc.com_id = c.comId
+        WHERE sc.user_id = #{userId}
+    </select>
+
+    <!-- 通过购物车ID查询单条记录 -->
+    <select id="selectById" resultMap="shopCartMap">
+        /* 根据购物车ID获取记录 */
+        SELECT
+            shopcart_id,
+            user_id,
+            com_id,
+            quantity,
+            is_checked
+        FROM shopcart
+        WHERE shopcart_id = #{shopcartId}
+    </select>
+    <!-- 更新商品数量 -->
+    <update id="updateById">
+        /* 修改购物车商品数量 */
+        UPDATE shopcart
+        SET quantity = #{quantity}
+        WHERE shopcart_id = #{shopcartId}
+    </update>
+
+    <!-- 删除购物车项 -->
+    <delete id="deleteById">
+        /* 删除指定购物车记录 */
+        DELETE FROM shopcart
+        WHERE shopcart_id = #{shopcartId}
+    </delete>
+
+    <!-- 切换选中状态 -->
+    <update id="toggleCheck">
+        /* 更新商品选中状态 */
+        UPDATE shopcart
+        SET is_checked = #{isChecked}
+        WHERE shopcart_id = #{shopcartId}
+    </update>
+
+</mapper>

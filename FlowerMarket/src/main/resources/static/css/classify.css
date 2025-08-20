@@ -1,0 +1,317 @@
+/* 全局样式 */
+ body {
+    margin: 0;
+    padding: 0;
+    width: 100vw; /* 视口宽度 */
+    height: 100vh; /* 视口高度 */
+    overflow:auto;
+}
+
+/* 主容器 */
+.main1 {
+    width: 100vw; /* 视口宽度 */
+    height: 90vh; /* 视口高度 */
+    padding: 0;
+    position: relative;
+    overflow: visible;
+}
+
+/* 菜单栏 */
+.group0 {
+    width: 100%; /* 按比例放大 */
+    height: 20%; /* 按比例放大 */
+    position: relative;
+    left: 0;
+    top: 0;
+    background-color: #C2F1D1;
+    z-index: 1;
+    display: flex;/*弹性布局*/
+    justify-content: space-between;/*对齐方式*/
+    align-items: center;
+    padding: 0 20px;/*元素边距*/
+
+}
+ /* 左上角头像和用户名 */
+.profile-section {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.profile_picture {
+    width: 50px; /* 调整图片大小 */
+    height: 50px;
+    margin-right: 10px;
+    top: 0; /* 紧贴上边距 */
+    border-radius: 50%; /* 圆形头像 */
+  
+}
+
+.username {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: '宋体';
+}
+ /* 中间拉长的图片和搜索框 */
+ .flower {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    height: 100px; /* 拉长图片 */
+    width: 60%;
+    top: 0;
+    left: 25%;
+    z-index: -1;/*图层*/
+}
+form{
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* 确保在flower上面 */
+}
+form input {
+    padding: 10px;
+    height: 20px;
+    width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: medium;
+    
+}
+form button {
+    width: 80px;
+    height: 40px;
+    background-color: #2c2f2c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+/* 右上角图标 */
+.icons {
+    position: absolute;
+    display: flex;
+    gap: 10px; /* 图标间距 */
+    left: 85%;
+    top: 0px;
+}
+.icons a {
+    text-decoration: none;
+}
+#refresh,#shopee,#services{
+    top: 0px;
+}
+/* 导航栏 */
+.group1 {
+    width: 100%; /* 按比例放大 */
+    height: auto; /* 按比例放大 */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #FFF8AC;
+}
+
+.group1 ul {
+    display: flex;/*横向排列*/
+    list-style: none;/*去除圆点*/
+    padding: 0;
+    margin: 0;
+    background-color: #FFF8AC;
+    height: 100%;
+    width: 100%;
+    justify-content: space-around;
+    top: 5px;
+}
+
+.group1 ul li {
+    font-size: 30px; 
+    color: #000000;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  
+}
+.group1 ul li a {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+a {
+    color: #333; /* 设置自定义颜色 */
+    text-decoration: none; /* 去除下划线 */
+  }
+.ul1 li a:hover {
+    background-color: #F6BE8C; /* 橙色背景 */
+    color: white; /* 文字变为白色 */
+    transform: translateY(-5px); /* 向上移动 */
+    border-radius: 10px 10px 0 0; /* 顶部圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+}
+
+/* 主内容区 */
+.main2 {
+    width: 100%; /* 按比例放大 */
+    height: calc(90vh - 20%); /* 动态计算高度 */
+    display: flex; /* 启用flex布局 */
+    position: static;
+    background: #FCFCE3;
+    flex: 1; /* 主内容区域占据剩余空间 */
+    z-index: 1;
+    left: 0;
+    top: 20%; /* 菜单栏高度 */
+}
+
+/* 侧边栏 */
+.group2 {
+    width: 20%; /* 按比例放大 */
+    height: 100%; /* 按比例放大 */
+    position: relative;
+    left: 0;
+    background: #FFDCDC;
+    border-radius: 5px;
+    overflow-y: auto; /* 超出时显示滚动条 */
+}
+
+.group2 label{
+    font-size: 50px;
+    color: #000000;
+    text-align: left;
+    top: 5%;
+    left: 5%;
+    font-family: "黑体";
+}
+
+.group2 ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    top: 25vh;
+    width: 100%;
+    max-height: 70vh;
+
+}
+.group2 ul li {
+    font-size: 30px;
+    color: #000000;
+    text-align: left;
+    margin: 3vh 0;
+    padding: 0 5vw;
+}
+a {
+    color: #333; /* 设置自定义颜色 */
+    text-decoration: none; /* 去除下划线 */
+}
+.group2 ul li a:hover {
+  
+    color: #A8143E 
+}
+
+/* 主内容区的内容 */
+.group3 {
+    flex: 1;
+    height: 100%;
+    background: #FFDCDC;
+    border-radius: 15px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 三列网格 */
+    gap: 10px;
+    align-content: start;
+    overflow-y: auto;                      /* 内容过多时滚动 */
+}
+.group3_0 {
+    width: 100%;
+    height: 100%;
+    min-height: 150px;    /* 最小高度限制 */
+    background: #D9D9D9;
+    border-radius: 10px;
+    display: flex;          /* 弹性布局 */
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative; /* 相对定位 */
+}
+.group3_1{
+    width: 100%; /* 按比例放大 */
+    height: 70%; /* 按比例放大 */
+    background: #FFFFFF;
+    position: absolute;
+}
+.text-container {
+    display: flex;
+    justify-content: space-between; /* 名称价格分列两侧 */
+    align-items: center;
+    padding: 0 10px;
+    flex-grow: 1; /* 占据剩余空间 */
+    min-height: 30%; /* 防止内容挤压 */
+}
+
+/* 调整文字样式 */
+.text-container a,
+.text-container label {
+    margin: 0; /* 清除原有边距 */
+    white-space: nowrap; /* 防止文字换行 */
+}
+#group3_1, #group3_2, #group3_3,
+#group3_4, #group3_5, #group3_6,
+#group3_7, #group3_8, #group3_9 {
+    left: auto;
+    top: auto;
+}
+.group3_0 a, .group3_0 label {
+    margin-top: auto; /* 将内容推到底部 */
+    margin-left: 50px; /* 添加左边距 */
+}
+.group3_0 label{
+    font:  30px sans-serif;
+    color: #FF0036;
+
+}
+.group3_0 a{
+    font: 30px "宋体";
+    color: rgb(42, 49, 69);;
+}
+.group3_1 img {
+    width: 100%; /* 图片宽度设置为 100% */
+    height: 100%; /* 图片高度设置为 100% */
+    object-fit: cover; /* 图片裁剪以适应 div */
+}
+/* 页脚样式 */
+footer {
+    background-color: #C2F1D1;
+    position: relative;
+    color: #000000;
+    padding: 2rem 0;
+    margin-top: auto; /* 页脚始终在底部 */
+    z-index: 2; /* 确保页脚不会被其他内容覆盖 */
+    width: 100%;
+    height: auto;
+  }
+  
+  footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-links {
+    margin-top: 1rem;
+  }
+  
+  .footer-links a {
+    color: #000000;
+    text-decoration: none;
+    margin: 0 0.8rem;
+    transition: color 0.3s;
+  }
+  
+  .footer-links a:hover {
+    color: #3498db;
+  }

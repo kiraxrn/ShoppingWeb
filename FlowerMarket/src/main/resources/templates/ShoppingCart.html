@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+    <!-- 引入静态资源时需使用 Thymeleaf 格式 -->
+    <link rel="stylesheet" href=../static/css/cart.css>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1>我的购物车 (<span th:text="${cartItems.size()}">0</span>件商品)</h1>
+        <nav>
+            <ul>
+                <li><a href="/main">首页</a></li>
+                <li><a href="/cart">购物车</a></li>
+                <li><a href="/help">帮助中心</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="container2">
+    <!-- 购物车为空时的提示 -->
+    <div th:if="${#lists.isEmpty(cartItems)}" class="empty-cart">
+        <p>您的购物车空空如也，快去首页逛逛吧！</p>
+        <a href="/main" class="btn-back">返回首页</a>    </div>
+
+    <!-- 购物车有商品时的展示 -->
+    <div th:unless="${#lists.isEmpty(cartItems)}" class="cart-container">
+        <div class="cart-items">
+            <!-- 遍历购物车商品 -->
+            <div class="cart-item" th:each="item : ${cartItems}">
+                <!-- 复选框绑定到 Checked 字段 -->
+                <input type="checkbox"
+                       class="item-checkbox"
+                       th:checked="${item.Checked}"
+                       th:data-price="${item.commodity?.comPrice}"
+                th:data-quantity="${item.quantity}"
+                th:onchange="'toggleCheck(this, ' + ${item.shopcartId} + ')'">
+                <!-- 商品信息 -->
+                <div class="item-info">
+                    <!-- 商品图片 -->
+                    <img th:src="@{${item.commodity?.comPicture}}" alt="商品图片" class="item-img">
+                    <!-- 商品名称 -->
+                    <h3 th:text="${item.commodity?.comName}">商品名称</h3>
+                    <!-- 商品价格 -->
+                    <span th:text="${#numbers.formatDecimal(item.commodity?.comPrice, 1, 2)}">0.00</span>                </div>
+
+                <!-- 数量调整 -->
+                <div class="quantity-control">
+                    <button class="btn-quantity"
+                            th:onclick="'updateQuantity(' + ${item.shopcartId} + ', -1)'">-</button>
+                    <input type="text" class="quantity-input"
+                           th:value="${item.quantity}" readonly>
+                    <button class="btn-quantity"
+                            th:onclick="'updateQuantity(' + ${item.shopcartId} + ', 1)'">+</button>
+                </div>
+
+                <!-- 删除按钮 -->
+                <button class="btn-delete"
+                        th:onclick="'deleteItem(' + ${item.shopcartId} + ')'">删除</button>
+            </div>
+        </div>
+
+        <!-- 结算栏 -->
+        <div class="cart-summary">
+            <!-- 总价计算（需后端传递 totalPrice 参数） -->
+            <div class="total-price">
+                总计：¥<span id="totalAmount" th:text="${#numbers.formatDecimal(totalPrice, 1, 2)}">0.00</span>
+            </div>
+            <button class="btn-checkout" id="btn-checkout">去结算</button>
+        </div>
+    </div>
+</main>
+</body>
+<script>
+    // 更新数量函数
+    function updateQuantity(cartId, delta) {
+        const input = event.target.closest('.quantity-control').querySelector('.quantity-input');
+        let currentValue = parseInt(input.value) || 1;
+        let newQuantity = currentValue + delta;
+        newQuantity = Math.max(newQuantity, 1);
+
+        fetch(`/cart/update?cartId=${cartId}&quantity=${newQuantity}`, {
+            method: 'POST'
+        }).then(response => {
+            if (response.ok) location.reload();
+        });
+    }
+
+    // 删除商品函数
+    function deleteItem(cartId) {
+        if (confirm('确定要删除该商品吗？')) {
+            fetch(`/cart/delete?cartId=${cartId}`, {
+                method: 'POST'
+            }).then(response => {
+                if (response.ok) location.reload();
+            });
+        }
+    }
+
+    // 复选框状态切换函数
+    function toggleCheck(checkbox, cartId) {
+        fetch(`/cart/toggleCheck?cartId=${cartId}&checked=${checkbox.checked}`, {
+            method: 'POST'
+        }).then(response => {
+            if (response.ok) {
+                calculateTotalPrice(); // 关键：触发总价更新
+            } else {
+                checkbox.checked = !checkbox.checked;
+            }
+        });
+    }
+
+    // 初始化数量输入框
+    function initializeQuantities() {
+        document.querySelectorAll('.quantity-input').forEach(input => {
+            if (!input.value || isNaN(input.value)) {
+                input.value = 1;
+            }
+        });
+    }
+
+    // 计算总价函数
+    function calculateTotalPrice() {
+        let total = 0;
+        document.querySelectorAll('.item-checkbox:checked').forEach(checkbox => {
+            const cartItem = checkbox.closest('.cart-item');
+            const price = parseFloat(checkbox.dataset.price);
+            const quantity = parseInt(cartItem.querySelector('.quantity-input').value);
+            total += price * quantity;
+        });
+        document.getElementById('totalAmount').textContent = total.toFixed(2);
+    }
+    //支付
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeQuantities();
+        calculateTotalPrice();
+
+        // 绑定结算按钮
+        document.getElementById('btn-checkout').addEventListener('click', function() {
+            calculateTotalPrice(); // 刷新总价
+            const total = parseFloat(document.getElementById('totalAmount').textContent);
+
+            Swal.fire({
+                title: '确认订单',
+                html: `
+                <div class="order-summary">
+                    <h4>订单详情</h4>
+                    <p>总计金额: ¥${total.toFixed(2)}</p>
+                </div>
+            `,
+                icon: 'question',
+                confirmButtonText: '立即支付',
+                showCancelButton: true,
+                cancelButtonText: '再想想'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // 模拟支付成功
+                    Swal.fire({
+                        icon: 'success',
+                        title: '支付成功!',
+                        text: `已支付 ¥${total.toFixed(2)}`,
+                        confirmButtonText: '完成'
+                    }).then(() => {
+                        window.location.href = '/main'; // 跳转回首页
+                    });
+                }
+            });
+        });
+    });
+
+    // 页面加载时初始化
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeQuantities();
+        calculateTotalPrice();
+    });
+</script>
+</html>

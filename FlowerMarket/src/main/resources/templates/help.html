@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>帮助中心 - 花鸟市场</title>
+  <link rel="stylesheet" href="../static/css/help.css">
+</head>
+<body>
+<div class="container">
+  <h1>帮助中心</h1>
+  <nav>
+    <ul>
+      <li><a href="/main">首页</a></li>
+      <li><a href="/cart">购物车</a></li>
+      <li><a href="/help">帮助中心</a></li>
+    </ul>
+  </nav>
+  <!-- 搜索框 -->
+  <div class="search-box">
+    <input type="text" placeholder="请输入您的问题关键词...">
+    <button class="btn">搜索</button>
+  </div>
+
+  <!-- 导航分类 -->
+  <nav class="category-nav">
+    <a href="#account">账户问题</a>
+    <a href="#order">订单问题</a>
+    <a href="#payment">支付问题</a>
+    <a href="#shipping">物流问题</a>
+    <a href="#return">退换货</a>
+  </nav>
+
+  <!-- 账户问题 -->
+  <section class="faq-section" id="account">
+    <h2>账户管理</h2>
+    <div class="question" onclick="toggleAnswer(1)">如何注册新账户？</div>
+    <div class="answer" id="answer1">
+      <p>1. 点击首页右上角"注册"按钮<br>
+        2. 输入手机号码/邮箱<br>
+        3. 获取并填写验证码<br>
+        4. 设置登录密码<br>
+        5. 完成实名认证（可选）</p>
+    </div>
+
+    <div class="question" onclick="toggleAnswer(2)">忘记密码怎么办？</div>
+    <div class="answer" id="answer2">
+      <p>1. 在登录页面点击"忘记密码"<br>
+        2. 输入注册时使用的手机号/邮箱<br>
+        3. 获取并验证验证码<br>
+        4. 设置新密码<br>
+        5. 重新登录</p>
+    </div>
+  </section>
+
+  <!-- 订单问题 -->
+  <section class="faq-section" id="order">
+    <h2>订单管理</h2>
+    <div class="question" onclick="toggleAnswer(3)">如何查询订单状态？</div>
+    <div class="answer" id="answer3">
+      <p>登录账户 → 进入"我的订单" → 选择对应订单查看详细状态</p>
+    </div>
+  </section>
+
+  <!-- 支付问题 -->
+  <section class="faq-section" id="payment">
+    <h2>支付方式</h2>
+    <div class="question" onclick="toggleAnswer(4)">支持哪些支付方式？</div>
+    <div class="answer" id="answer4">
+      <p>• 支付宝支付<br>
+        • 微信支付<br>
+        • 银联在线支付<br>
+        • 信用卡支付（支持Visa/MasterCard）</p>
+    </div>
+  </section>
+
+  <!-- 售后服务 -->
+  <div class="contact-section">
+    <h3>需要更多帮助？</h3>
+    <p>客服热线：400-123-4567（每日9:00-21:00）<br>
+      在线客服：<button>立即咨询</button><br>
+      服务邮箱：service@tiantian.com</p>
+  </div>
+</div>
+
+<script>
+  function toggleAnswer(id) {
+    const answer = document.getElementById('answer' + id);
+    answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
+</body>
+</html>

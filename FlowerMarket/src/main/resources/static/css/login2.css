@@ -1,0 +1,64 @@
+  .container0 {
+   display: flex;
+    width: 100vw; /* 视口宽度的100% */
+    height: 100vh; /* 视口高度的100% */
+    background-color: #b2f9c8;
+    position: relative; /* 为绝对定位子元素提供参照 */
+  }
+  
+  .container1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%; /* 相对父容器缩小 */
+    height: auto; /* 高度自适应 */
+    aspect-ratio: 1097/804; /* 保持原始宽高比 */
+    max-width: 1097px; /* 最大尺寸限制 */
+    max-height: 804px;
+    background-color: #FFB87B;
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center;     /* 垂直居中 */
+  }
+  .container1_1 {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .container1_1 input {
+    width: 90%; /* 调整输入框的宽度 */
+    height: 30px; /* 调整输入框的高度 */
+    margin-top: 10px; /* 调整输入框与上一个元素的间距 */
+    margin-bottom: 10px; /* 调整输入框与下一个元素的间距 */
+    font-size: 20px;
+  }
+  .container1_1 label {
+    margin-bottom: 2px; /* 标签与输入框之间的间距 */
+    font: 20px "宋体"; /* 标签字体大小样式*/
+    color: #333; /* 标签字体颜色 */
+  }
+  
+  #loginBtn {
+    width: 180px;
+    height: 60px;
+    align-self: center; /* 按钮自身居中 */
+    margin-top: 20px;
+    font: 30px "黑体";
+    background-color: #1d295f;
+    color: #EBFFEE;
+    border-color: #2c2c2c;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  /* 响应式调整 */
+  @media (max-width: 768px) {
+    .container1 {
+      width: 80%;
+      aspect-ratio: 3/4;
+    }
+    .container1_1 {
+      width: 80%;
+    }
+  }

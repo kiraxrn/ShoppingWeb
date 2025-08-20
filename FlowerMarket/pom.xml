@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- modelVersion 是 POM 的版本号，必须为 4.0.0 -->
+    <modelVersion>4.0.0</modelVersion>
+    <!-- parent 元素指定了父项目的坐标，当前项目继承父项目的配置 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.4</version>
+        <relativePath/> <!-- lookup parent from repository：从远程仓库查找父项目 -->
+    </parent>
+    <!-- groupId 是项目的组 ID，通常是项目的顶级域名反写 -->
+    <groupId>com.wolftcode</groupId>
+    <!-- artifactId 是项目的唯一标识符，通常是项目的名称 -->
+    <artifactId>FlowerMarket</artifactId>
+    <!-- version 是项目的版本号 -->
+    <version>0.0.1-SNAPSHOT</version>
+    <!-- name 是项目的名称 -->
+    <name>FlowerMarket</name>
+    <!-- description 是项目的描述信息 -->
+    <description>FlowerMarket</description>
+    <!-- url 是项目的官方地址 -->
+    <url/>
+    <!-- licenses 是项目的许可证信息 -->
+    <licenses>
+        <license/>
+    </licenses>
+    <!-- developers 是项目的开发者信息 -->
+    <developers>
+        <developer/>
+    </developers>
+    <!-- scm 是项目的版本控制系统信息 -->
+    <scm>
+        <connection/>
+        <developerConnection/>
+        <tag/>
+        <url/>
+    </scm>
+    <!-- properties 是项目的属性配置 -->
+    <properties>
+        <java.version>17</java.version> <!-- 指定 Java 版本为 17 -->
+    </properties>
+    <!-- dependencies 是项目的依赖配置 -->
+    <dependencies>
+        <!-- 引入 Spring Boot Web 启动依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- Mybatis 集成到 SpringBoot 中的依赖 -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>3.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <!-- 引入 MySQL Connector J 运行时依赖 -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+        <!-- 引入 Spring Boot 测试依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- 引入 MyBatis Spring Boot 测试依赖 -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter-test</artifactId>
+            <version>3.0.4</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- 事务 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!-- druid 自动装配-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.2.8</version>
+        </dependency>
+
+        <!-- Spring Boot 热部署插件 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+        <!-- 分页插件 PageHelper -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+        <!-- FastJson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
+        </dependency>
+        <!-- Thymeleaf 依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version> <!-- 使用最新稳定版本 -->
+            <scope>provided</scope>
+        </dependency>
+        <!-- MybatisPlus -->
+        <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.12</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.5.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
+        </dependency>
+    </dependencies>
+    <!-- build 是项目的构建配置 -->
+    <build>
+        <!-- plugins 是项目的构建插件配置 -->
+        <plugins>
+            <!-- 引入 Spring Boot Maven 插件 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- MyBatis 逆向工程插件 -->
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.2</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.mysql</groupId>
+                        <artifactId>mysql-connector-j</artifactId>
+                        <version>8.0.33</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <!-- 添加阿里云镜像加速 -->
+        <repository>
+            <id>aliyun</id>
+            <name>Aliyun Maven</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </repository>
+
+    </repositories>
+</project>

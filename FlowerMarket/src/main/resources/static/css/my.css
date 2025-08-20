@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #FFF8AC;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.order-list {
+    margin-top: 20px;
+}
+.order {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    padding: 15px;
+}
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+.order-id {
+    font-weight: bold;
+}
+.order-date {
+    color: #666;
+}
+.order-status {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.status-pending {
+    background-color: #f4a261;
+    color: white;
+}
+.status-paid {
+    background-color: #2a9d8f;
+    color: white;
+}
+.status-delivered {
+    background-color: #264653;
+    color: white;
+}
+.order-items {
+    margin-bottom: 15px;
+}
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+.order-item-name {
+    flex: 1;
+}
+.order-item-price {
+    color: #e63946;
+    font-weight: bold;
+}
+.order-total {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+.empty-orders {
+    text-align: center;
+    padding: 50px 0;
+    color: #666;
+}

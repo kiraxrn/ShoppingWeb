@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowerLogin1</title>
+   <link rel="stylesheet" href="../static/css/login1.css" >
+</head>
+<body>
+  <div class="container0">
+    <div class="container1">
+      <!-- 绘制三角形 -->
+      <div class="triangle"></div>
+  
+      <!-- 按钮 -->
+      <button type="button" class="inter" id="seller">注册</button>
+      <button type="button" class="inter" id="use">登录</button>
+  
+      <!-- 使用 SVG 绘制圆形 -->
+      <svg id="circle"
+        width="162"
+        height="151"
+        viewBox="0 0 162 151"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <ellipse cx="81" cy="75.5" rx="81" ry="75.5" fill="#2C2C2C"></ellipse>
+      </svg>
+  
+      <!-- 使用 SVG 绘制默认用户图标 -->
+      <svg id="user"
+        width="115"
+        height="115"
+        viewBox="0 0 115 115"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M57.4608 0C41.6591 0 28.7304 16.089 28.7304 35.913C28.7304 55.737 41.6591 71.826 57.4608 71.826C73.2625 71.826 86.1912 55.737 86.1912 35.913C86.1912 16.089 73.2625 0 57.4608 0ZM27.4375 71.826C12.2104 72.5443 0 85.042 0 100.556V114.922H114.922V100.556C114.922 85.042 102.855 72.5443 87.4841 71.826C79.7269 80.5888 69.0966 86.1912 57.4608 86.1912C45.825 86.1912 35.1947 80.5888 27.4375 71.826Z"
+          fill="#70A2F1"
+        ></path>
+      </svg>
+    </div>
+  </div>
+</body>
+<script>
+// 通过dom获取所有符合条件的按钮元素
+const buttons = document.getElementsByClassName('inter');
+
+// 遍历所有按钮并为它们添加点击事件监听器
+for (let i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener('click', function() {
+    this.style.backgroundColor = '#5D79F6';
+
+    setTimeout(() => {
+      const targetPath = i === 0 ? '/login3' : '/login2';
+      window.location.href = targetPath;
+    }, 500);
+  });
+}
+</script>
+</html>

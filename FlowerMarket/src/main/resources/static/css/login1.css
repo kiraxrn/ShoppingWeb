@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .container0 {
+    position: fixed; /* 或者使用 absolute */
+    left: 0;
+    top: 0;
+    width: 100vw; /* 视口宽度的100% */
+    height: 100vh; /* 视口高度的100% */
+    background-color: #b2f9c8;
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    flex-direction: column; /* 子元素垂直排列 */
+  }
+  
+  .container1 {
+    position: absolute; /* 绝对定位 */
+    top: 50%; /* 距离顶部50% */
+    left: 50%; /* 距离左侧50% */
+    width: 977px;
+    height: 676px;
+    background-color: #FFB87B;
+    border-radius: 23px; /* 圆角23 */
+    display: flex; /* 子元素使用flex布局 */
+    flex-direction: column; /* 子元素垂直排列 */
+    align-items: center; /* 子元素水平居中 */
+    justify-content: flex-start; /* 子元素从顶部开始排列 */
+    gap: 20px; /* 子元素之间的间距 */
+    padding-bottom: 160px; /* 按钮底部距离 */
+    transform: translate(-50%, -50%); /* 向左和向上分别移动其自身宽度和高度的 50%以对齐中心 */
+  }
+  .triangle {
+    position: relative; /* 相对定位 */
+    width: 0;
+    height: 0;
+    border-radius: 23px; /* 圆角23 */
+    border-left: 488.5px solid transparent; /* 左边框实线透明，宽度为容器宽度的一半 */
+    border-right: 488.5px solid transparent; /* 右边框实线透明，宽度为容器宽度的一半 */
+    border-top: 400px solid #F6C9A2; /* 上边框设置颜色，高度为400px */
+  }
+  #circle{
+    position: absolute;
+    top: 350px; 
+    left: 410px; 
+  }
+  #user{
+    position: absolute;
+    top: 353px; 
+    left: 432px; 
+  }
+.inter {
+    position: absolute; /* 绝对定位 */
+    bottom: 150px; /* 距离底部150像素 */
+    width: 182px;
+    height: 86px;
+    background-color: #1d295f;
+    font: 40px "黑体";
+    color: #EBFFEE;/*字体颜色*/
+    border-width: 1px;
+    border-style: solid;/*边框为实现*/
+    border-color: #2c2c2c;
+    justify-content: center; /* 子元素水平居中对齐 */
+    align-items: center;     /* 子元素垂直居中对齐 */
+    border-radius: 8px;/*圆角*/
+    display: flex;
+    padding: 12px;
+  }
+  #seller {
+    left: 150px; /* 距离左侧150像素 */
+  }
+  
+  #use{
+    left:680px; 
+  }

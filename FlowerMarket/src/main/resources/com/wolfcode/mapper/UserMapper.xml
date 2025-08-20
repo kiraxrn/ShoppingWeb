@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfcode.mapper.UserMapper">
+
+    <!--更新-->
+    <update id="update">
+        UPDATE user
+        SET username = #{username} ,
+            password = #{password},
+            email = #{email},
+            userpicture=#{userpicture}
+        WHERE userid = #{userid}
+    </update>
+    <!--查找id-->
+        <select id="findByUserid" resultType="com.wolfcode.domain.User">
+            select * from user
+            WHERE userid = #{userid}
+        </select>
+    <!--查找email-->
+       <select id="findByEmail" resultType="com.wolfcode.domain.User">
+            select * from user
+            WHERE email = #{email}
+       </select>
+    <!--查找用户名和密码-->
+    <select id="selectByUsernameAndPassword" resultType="com.wolfcode.domain.User">
+        select * from user
+        where username = #{username} and password = #{password}
+    </select>
+    <select id="selectByUsername" resultType="com.wolfcode.domain.User">
+        SELECT id, username, password
+        FROM user
+        WHERE username = #{username}
+    </select>
+
+    <!--新增用户-->
+    <insert id="insertUser" parameterType="com.wolfcode.domain.User"
+                useGeneratedKeys="true" keyProperty="userId">
+            INSERT INTO user(userid,username, password, email)
+            VALUES(#{userid},#{username}, #{password}, #{email})
+    </insert>
+</mapper>

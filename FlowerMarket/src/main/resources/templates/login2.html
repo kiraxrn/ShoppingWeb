@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowerLogin2</title>
+    <!-- 确保静态资源路径正确（Spring Boot默认静态资源目录为/static） -->
+    <link rel="stylesheet" href="../static/css/login2.css">
+    <!-- 引入jQuery和SweetAlert2 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/limonte-sweetalert2/11.4.24/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/limonte-sweetalert2/11.4.24/sweetalert2.min.css">
+</head>
+<body>
+<div class="container0">
+    <!-- form的action和字段名需要匹配后端 -->
+    <form id="loginForm"> <!-- 用AJAX提交 -->
+        <div class="container1">
+            <div class="container1_1">
+                <label for="username">账号：</label>
+                <input type="text" id="username" name="username" placeholder="请输入账号" required>
+                <label for="password">密码：</label>
+                <input type="password" id="password" name="password" placeholder="请输入密码" required>
+                <!-- 按钮类型为button，避免表单默认提交 -->
+                <button type="button" id="loginBtn">登录</button></div>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+    // login.js
+    //DOM加载完成后绑定登录按钮的点击事件
+    $(document).ready(function() {
+        $("#loginBtn").click(function(e) {
+            e.preventDefault(); // 阻止表单默认提交行为
+
+            const username = $("#username").val().trim();
+            const password = $("#password").val().trim();
+
+            // 输入验证
+            if (!username || !password) {
+                Swal.fire({
+                    icon: "error",
+                    title: "输入错误",
+                    text: "用户名和密码不能为空"
+                });
+                return;
+            }
+
+            // 显示加载状态
+            Swal.fire({
+                title: "登录中...",
+                html: "请稍候",
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            // AJAX 请求
+            $.ajax({
+                url: "/login", // 连接后端接口
+                method: "POST",//方法为post
+                data: {
+                    username: username,
+                    password: password
+                },
+                dataType: "json",
+                //响应处理
+                success: function(response) {
+                    if (response.success) {
+                        window.location.href = "/main"; // 跳转到仪表盘
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "登录失败",
+                            text: response.message || "未知错误"
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    const errorMsg = xhr.responseJSON?.message || "网络请求失败";
+                    Swal.fire({
+                        icon: "error",
+                        title: "错误",
+                        text: errorMsg
+                    });
+                },
+                complete: function() {
+                    Swal.close();
+                }
+            });
+        });
+    });
+
+</script>
+</html>

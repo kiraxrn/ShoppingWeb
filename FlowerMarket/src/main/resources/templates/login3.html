@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowerLogin3</title>
+    <link rel="stylesheet" href="../static/css/login3.css">
+    <!-- 添加 Swal 样式依赖 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+<div class="container0">
+    <form id="registerForm"> <!-- 改为 AJAX 提交 -->
+        <div class="container1">
+            <div class="container1_1">
+                <label for="userid">账号：</label>
+                <input type="text" id="userid" maxlength="16" name="userid" placeholder="请输入账号" autocomplete="on" autofocus required><br>
+                <label for="username">用户名：</label>
+                <input type="text" id="username" maxlength="16" name="username" placeholder="请输入用户名" autocomplete="on" autofocus required><br>
+
+                <label for="email">邮箱：</label>
+                <input type="email" id="email" name="email" placeholder="请输入邮箱" required><br>
+
+                <label for="pasw">密码：</label>
+                <input type="password" id="pasw" maxlength="16" name="pasw" placeholder="请输入密码" required><br>
+
+                <label for="confirmPasw">确认密码：</label>
+                <input type="password" id="confirmPasw" maxlength="16" name="confirmPasw" placeholder="请再次输入密码" required>
+            </div>
+            <button type="button" id="inter">注册</button> <!-- 改为 type="button" -->
+        </div>
+    </form>
+</div>
+
+<!-- 添加 jQuery 和 Swal 依赖 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#inter').click(function(e) {
+            e.preventDefault();
+
+            const userid = $('#userid').val().trim(); // 获取userid字段的值
+            const username = $('#username').val().trim();
+            const email = $('#email').val().trim();
+            const password = $('#pasw').val().trim();
+            const confirmPassword = $('#confirmPasw').val().trim();
+
+            // 增强客户端验证
+            if (!userid || !username || !email || !password || !confirmPassword) { // 检查 userid 是否为空
+                Swal.fire("错误", "所有字段必须填写", "error");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                Swal.fire("错误", "两次密码输入不一致", "error");
+                return;
+            }
+
+            if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+                Swal.fire("错误", "邮箱格式不正确", "error");
+                return;
+            }
+
+            Swal.showLoading();
+
+            $.ajax({
+                url: '/register',
+                method: 'POST',
+                contentType: 'application/json', // 改为 JSON 格式
+                data: JSON.stringify({
+                    userid: userid, // 发送 userid
+                    username: username,
+                    email: email,
+                    pasw: password,
+                    confirmPasw: confirmPassword
+                }),
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '注册成功',
+                            text: '即将跳转到登录页面',
+                            timer: 1500,
+                            showConfirmButton: false
+                        }).then(() => {
+                            window.location.href = '/login2';
+                        });
+                    } else {
+                        Swal.fire("注册失败", response.msg, "error");
+                    }
+                },
+                error: (xhr) => {
+                    const msg = xhr.responseJSON?.msg || "网络请求失败";
+                    Swal.fire("错误", msg, "error");
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

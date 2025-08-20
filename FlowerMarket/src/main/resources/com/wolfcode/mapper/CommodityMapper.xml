@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wolfcode.mapper.CommodityMapper">
+
+    <resultMap id="commodityResultMap" type="com.wolfcode.domain.Commodity">
+        <id property="comId" column="comId"/>
+        <result property="comName" column="comName"/>
+        <result property="comPrice" column="comPrice"/>
+        <result property="comPicture" column="comPicture"/>
+        <result property="comDepartment" column="comDepartment"/>
+    </resultMap>
+
+    <select id="selectById" resultMap="commodityResultMap">
+        SELECT * FROM commodity WHERE comId = #{comId};
+    </select>
+    <select id="selectAll" resultType="com.wolfcode.domain.Commodity">
+        SELECT * FROM commodity
+    </select>
+    <select id="selectByDepartment" resultType="com.wolfcode.domain.Commodity">
+        SELECT * FROM commodity WHERE comDepartment = #{comDepartment}
+    </select>
+</mapper>
